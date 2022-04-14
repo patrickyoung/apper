@@ -1,6 +1,5 @@
 {{ define "health/status.tmpl" }}
 <html>
-<h1>{{ .status }}</h1>
-<h2>{{ .now | formatAsDate }}</h2>
+{{template "messages/status" .}}
 </html>
 {{ end }}
