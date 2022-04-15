@@ -2,25 +2,15 @@ package main
 
 import (
 	"embed"
+	"fmt"
 	"html/template"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
 
 //go:embed templates/*
 var f embed.FS
-
-func initWeb() {
-	r := gin.Default()
-	r.SetTrustedProxies([]string{"127.0.0.1"})
-
-	templateFunctions(r)
-	routes(r)
-
-	Connect()
-
-	r.Run(":8080")
-}
 
 func templateFunctions(r *gin.Engine) {
 	myFuncMap := template.FuncMap{
@@ -32,11 +22,7 @@ func templateFunctions(r *gin.Engine) {
 	r.SetHTMLTemplate(templ)
 }
 
-func routes(r *gin.Engine) {
-	health := r.Group("/health")
-	{
-		health.GET("/ping", ping)
-		health.GET("/status", status)
-		health.GET("/db", dbStatus)
-	}
+func formatAsDate(t time.Time) string {
+	year, month, day := t.Date()
+	return fmt.Sprintf("%d/%02d/%02d", year, month, day)
 }
