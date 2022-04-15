@@ -17,6 +17,8 @@ func initWeb() {
 	templateFunctions(r)
 	routes(r)
 
+	Connect()
+
 	r.Run(":8080")
 }
 
@@ -35,5 +37,6 @@ func routes(r *gin.Engine) {
 	{
 		health.GET("/ping", ping)
 		health.GET("/status", status)
+		health.GET("/db", dbStatus)
 	}
 }

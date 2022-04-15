@@ -1,0 +1,7 @@
+{{ define "health/db.tmpl" }}
+<html>
+{{ range $idx, $row := .data }}
+    {{ $row.SampleData }}
+{{ end }}
+</html>
+{{ end }}
